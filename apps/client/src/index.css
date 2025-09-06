@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Press Start 2P';
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://fonts.gstatic.com/s/pressstart2p/v11/e3t4euS0C3gIaWE7K8vB_m4Y3sffwL68.ttf') format('truetype');
+    font-display: swap;
+  }
+  :root {
+    --color-bg: #001100;
+    --color-text: #33ff66;
+  }
+  [data-theme='night'] {
+    --color-bg: #000022;
+    --color-text: #66ccff;
+  }
+  body {
+    @apply font-pixel bg-[var(--color-bg)] text-[var(--color-text)] min-h-screen;
+  }
+}
+
+@layer components {
+  .crt-frame {
+    @apply relative flex min-h-screen items-center justify-center bg-[var(--color-bg)] text-[var(--color-text)];
+  }
+  .crt-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 0) 1px,
+      rgba(0, 0, 0, 0.2) 2px
+    );
+    opacity: 0.2;
+  }
+  .crt-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 20px var(--color-text);
+    opacity: 0.15;
+  }
+
+  .retro-btn {
+    @apply font-pixel bg-[var(--color-text)] text-[var(--color-bg)] px-4 py-2 transition-all motion-reduce:transition-none;
+    box-shadow: 4px 4px 0 var(--color-bg);
+  }
+  .retro-btn:hover {
+    @apply motion-reduce:transform-none;
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--color-bg);
+  }
+  .retro-btn:active {
+    @apply motion-reduce:transform-none;
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 var(--color-bg);
+  }
+  .retro-btn:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .crt-glow {
+    text-shadow: 0 0 2px var(--color-text), 0 0 6px var(--color-text);
+  }
+}
