@@ -7,7 +7,8 @@
     font-family: 'Press Start 2P';
     font-style: normal;
     font-weight: 400;
-    src: url('https://fonts.gstatic.com/s/pressstart2p/v11/e3t4euS0C3gIaWE7K8vB_m4Y3sffwL68.ttf') format('truetype');
+    src: url('https://fonts.gstatic.com/s/pressstart2p/v11/e3t4euS0C3gIaWE7K8vB_m4Y3sffwL68.ttf')
+      format('truetype');
     font-display: swap;
   }
   :root {
@@ -67,10 +68,44 @@
     outline: 2px solid var(--color-text);
     outline-offset: 2px;
   }
+
+  .pixel-cat {
+    @apply text-[var(--color-text)];
+  }
+
+  .pixel-cat .ear {
+    transform-origin: left bottom;
+  }
+
+  .pixel-cat .ear.shake {
+    animation: ear-shake 0.3s ease-in-out;
+  }
+
+  @keyframes ear-shake {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(-20deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pixel-cat .ear.shake {
+      animation: none;
+    }
+  }
+
+  .tooltip {
+    @apply absolute -top-6 left-1/2 -translate-x-1/2 border border-[var(--color-text)] bg-[var(--color-bg)] px-2 py-1 text-xs;
+  }
 }
 
 @layer utilities {
   .crt-glow {
-    text-shadow: 0 0 2px var(--color-text), 0 0 6px var(--color-text);
+    text-shadow:
+      0 0 2px var(--color-text),
+      0 0 6px var(--color-text);
   }
 }
