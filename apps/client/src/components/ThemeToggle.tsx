@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import RetroButton from './RetroButton';
 import Toast from './Toast';
 
@@ -26,15 +26,25 @@ export default function ThemeToggle({ className = '' }: Props) {
     window.localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     const next = theme === 'day' ? 'night' : 'day';
     setTheme(next);
     setToast(`${next === 'day' ? 'Day' : 'Night'} mode`);
-  };
+  }, [theme]);
+
+  useEffect(() => {
+    const handler = () => toggle();
+    window.addEventListener('toggle-theme', handler);
+    return () => window.removeEventListener('toggle-theme', handler);
+  }, [toggle]);
 
   return (
     <>
-      <RetroButton onClick={toggle} aria-label="Toggle theme" className={className}>
+      <RetroButton
+        onClick={toggle}
+        aria-label="Toggle theme"
+        className={className}
+      >
         {theme === 'day' ? 'Night' : 'Day'}
       </RetroButton>
       {toast && <Toast message={toast} />}
