@@ -3,21 +3,24 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "pnpm --filter './apps/*' --parallel dev",
-    "build": "pnpm --filter './apps/*' build",
-    "test": "pnpm --filter './apps/*' test",
-    "lint": "pnpm --filter './apps/*' lint",
-    "format": "pnpm --filter './apps/*' format"
+    "dev": "concurrently -k -n client,server -c auto \"npm run dev -w apps/client\" \"npm run dev -w apps/server\"",
+    "build": "npm run build -w apps/client && npm run build -w apps/server",
+    "lint": "npm run lint -w apps/client && npm run lint -w apps/server",
+    "test": "npm run test -w apps/client && npm run test -w apps/server"
   },
   "devDependencies": {
+    "@types/node": "^20.5.1",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
+    "concurrently": "^9.2.1",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.0.3",
-    "typescript": "^5.2.2",
-    "@types/node": "^20.5.1"
-  }
+    "typescript": "^5.2.2"
+  },
+  "workspaces": [
+    "apps/*"
+  ]
 }
