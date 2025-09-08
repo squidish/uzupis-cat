@@ -69,6 +69,27 @@
     outline-offset: 2px;
   }
 
+  .printer-paper {
+    @apply relative mx-auto max-w-md bg-white p-8 text-black;
+    box-shadow: 0 0 0 1px #ddd;
+  }
+  .printer-paper::before,
+  .printer-paper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    background: radial-gradient(circle at 8px 8px, var(--color-bg) 2px, transparent 3px)
+      0 0/16px 16px repeat-y;
+  }
+  .printer-paper::before {
+    left: -16px;
+  }
+  .printer-paper::after {
+    right: -16px;
+  }
+
   .pixel-cat {
     @apply text-[var(--color-text)];
   }
