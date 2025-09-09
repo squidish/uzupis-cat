@@ -10,6 +10,7 @@ export default function PixelCat({ scratchTrigger }: PixelCatProps) {
   useEffect(() => {
     const ear = earRef.current;
     if (!ear) return;
+    // Trigger ear shake; CSS respects prefers-reduced-motion
     ear.classList.add('shake');
     const handle = () => ear.classList.remove('shake');
     ear.addEventListener('animationend', handle, { once: true });

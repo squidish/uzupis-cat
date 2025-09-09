@@ -15,7 +15,10 @@ export default function Constitution() {
         <ThemeToggle />
       </div>
       <main className="printer-paper">
-        <h1 className="crt-glow mb-4 text-xl">{t('constitution.title')}</h1>
+        {/* Focus target for route changes */}
+        <h1 id="main-heading" tabIndex={-1} className="crt-glow mb-4 text-xl">
+          {t('constitution.title')}
+        </h1>
         <ul className="list-disc space-y-2 pl-6">
           {(t('constitution.lines') as string[]).map((line) => (
             <li key={line}>{line}</li>

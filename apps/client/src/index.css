@@ -14,10 +14,16 @@
   :root {
     --color-bg: #001100;
     --color-text: #33ff66;
+    /* High-contrast theme tokens */
+    --color-bg-elevated: #002200;
+    --color-text-high: #ffffff;
   }
   [data-theme='night'] {
     --color-bg: #000022;
     --color-text: #66ccff;
+    /* Night variant of high-contrast tokens */
+    --color-bg-elevated: #000044;
+    --color-text-high: #ffffff;
   }
   body {
     @apply font-pixel bg-[var(--color-bg)] text-[var(--color-text)] min-h-screen;
@@ -112,6 +118,7 @@
     }
   }
 
+  /* Disable ear animation when user prefers reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .pixel-cat .ear.shake {
       animation: none;
@@ -119,7 +126,8 @@
   }
 
   .tooltip {
-    @apply absolute -top-6 left-1/2 -translate-x-1/2 border border-[var(--color-text)] bg-[var(--color-bg)] px-2 py-1 text-xs;
+    /* High-contrast tooltip styling for readability */
+    @apply absolute -top-6 left-1/2 -translate-x-1/2 border border-[var(--color-text)] bg-elevated text-high px-2 py-1 text-xs;
   }
 }
 

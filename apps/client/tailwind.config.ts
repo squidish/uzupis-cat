@@ -6,7 +6,13 @@ export default {
     fontFamily: {
       pixel: ['"Press Start 2P"', 'ui-monospace', 'monospace'],
     },
-    extend: {},
+    extend: {
+      // High-contrast theme tokens consumed via utility classes like text-high
+      colors: {
+        high: 'var(--color-text-high)',
+        elevated: 'var(--color-bg-elevated)',
+      },
+    },
   },
   plugins: [],
 } satisfies Config;

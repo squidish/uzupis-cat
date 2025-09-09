@@ -74,21 +74,29 @@ export default function Pledges() {
   return (
     <CRTFrame>
       <Nav />
-      <div className="flex flex-col gap-4">
-        <h1 className="crt-glow text-xl">{t('pledges.title')}</h1>
+      {/* Main pledge content */}
+      <main className="flex flex-col gap-4">
+        {/* Heading is focus target when routes change */}
+        <h1 id="main-heading" tabIndex={-1} className="crt-glow text-xl">
+          {t('pledges.title')}
+        </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t('pledges.name') as string}
+            aria-label={t('pledges.name') as string}
+            // Placeholder-only inputs need explicit labels for screen readers
             className="border border-[var(--color-text)] bg-transparent p-2"
           />
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder={t('pledges.message') as string}
+            aria-label={t('pledges.message') as string}
             maxLength={300}
             required
+            // Ensure textarea is labelled for assistive tech
             className="border border-[var(--color-text)] bg-transparent p-2"
           />
           <button type="submit" className="self-start border border-[var(--color-text)] px-4 py-2">
@@ -108,7 +116,7 @@ export default function Pledges() {
         ) : (
           <p>{t('pledges.noPledges')}</p>
         )}
-      </div>
+      </main>
       {toast && <Toast message={toast} />}
       <div className="absolute top-4 right-4 flex gap-2">
         <LanguageToggle />
