@@ -1,14 +1,16 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+// apps/client/vite.config.ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/api': {
+        target: 'http://localhost:3000', // Express dev server
+        changeOrigin: true,
+        // no boolean here; keep it an object
+      },
     },
   },
-  test: {
-    environment: 'jsdom',
-  },
-});
+})

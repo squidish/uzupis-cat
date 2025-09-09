@@ -5,6 +5,8 @@ import ThemeToggle from '../components/ThemeToggle';
 import Nav from '../components/Nav';
 import Toast from '../components/Toast';
 
+const API = import.meta.env.VITE_API_BASE ?? '';
+
 interface Pledge {
   name?: string;
   message: string;
@@ -12,8 +14,8 @@ interface Pledge {
 }
 
 async function fetchPledges(): Promise<Pledge[]> {
-  const res = await fetch('http://localhost:3000/api/pledge');
-  if (!res.ok) throw new Error('Failed to load pledges');
+  const res = await fetch(`${API}/api/pledge`);
+  if (!res.ok) throw new Error(`Failed to load pledges: ${res.status}`);
   return res.json();
 }
 
@@ -28,7 +30,7 @@ export default function Pledges() {
 
   const mutation = useMutation({
     mutationFn: async (payload: { name?: string; message: string }) => {
-      const res = await fetch('http://localhost:3000/api/pledge', {
+      const res = await fetch(`${API}/api/pledge`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
