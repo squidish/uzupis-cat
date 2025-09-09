@@ -5,6 +5,8 @@ import ThemeToggle from '../components/ThemeToggle';
 import PixelCat from '../components/PixelCat';
 import Toast from '../components/Toast';
 import Nav from '../components/Nav';
+import LanguageToggle from '../components/LanguageToggle';
+import { useI18n } from '../i18n';
 
 const KONAMI = [
   'ArrowUp',
@@ -26,6 +28,7 @@ export default function Home() {
   const [tooltip, setTooltip] = useState<string | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const konamiIndex = useRef(0);
+  const { t } = useI18n();
 
   useEffect(() => {
     const fetchVisits = async () => {
@@ -57,10 +60,10 @@ export default function Home() {
       setScratchTrigger((c) => c + 1);
       chime();
       if (showToast) {
-        setToast('Fear scratched away. Go create something kind.');
+        setToast(t('home.toast'));
       }
     },
-    [chime],
+    [chime, t],
   );
 
   useEffect(() => {
@@ -68,7 +71,7 @@ export default function Home() {
       const key = e.key.toLowerCase();
       if (key === 's') {
         scratch(false);
-        setTooltip('Sdraskyk ausį!');
+        setTooltip(t('home.tooltip'));
         setTimeout(() => setTooltip(null), 2000);
         return;
       }
@@ -89,15 +92,18 @@ export default function Home() {
   return (
     <CRTFrame>
       <Nav />
-      <h1 className="crt-glow text-2xl">Užupis Cat — Retro Tribute</h1>
-      <ThemeToggle className="absolute top-4 right-4" />
+      <h1 className="crt-glow text-2xl">{t('home.title')}</h1>
+      <div className="absolute top-4 right-4 flex gap-2">
+        <LanguageToggle />
+        <ThemeToggle />
+      </div>
       {visitCount !== null && <p className="mt-4">Visitor #{visitCount}</p>}
       <div className="relative">
         <PixelCat scratchTrigger={scratchTrigger} />
         {tooltip && <div className="tooltip">{tooltip}</div>}
       </div>
       <RetroButton onClick={() => scratch()} className="mt-4">
-        Scratch Ear
+        {t('home.button')}
       </RetroButton>
       {toast && <Toast message={toast} />}
     </CRTFrame>

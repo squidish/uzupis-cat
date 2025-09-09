@@ -4,6 +4,8 @@ import CRTFrame from '../components/CRTFrame';
 import ThemeToggle from '../components/ThemeToggle';
 import Nav from '../components/Nav';
 import Toast from '../components/Toast';
+import LanguageToggle from '../components/LanguageToggle';
+import { useI18n } from '../i18n';
 
 const API = import.meta.env.VITE_API_BASE ?? '';
 
@@ -25,6 +27,7 @@ export default function Pledges() {
   const [toast, setToast] = useState('');
   const queryClient = useQueryClient();
   const submitTimer = useRef<ReturnType<typeof setTimeout>>();
+  const { t } = useI18n();
 
   const { data: pledges } = useQuery({ queryKey: ['pledges'], queryFn: fetchPledges });
 
@@ -48,7 +51,7 @@ export default function Pledges() {
     },
     onError: (_err, _payload, context) => {
       if (context?.previous) queryClient.setQueryData(['pledges'], context.previous);
-      setToast('Something went wrong');
+      setToast(t('pledges.toastError'));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['pledges'] });
@@ -59,7 +62,7 @@ export default function Pledges() {
     e.preventDefault();
     const trimmed = message.trim();
     if (trimmed.length === 0 || trimmed.length > 300) {
-      setToast('Message must be between 1 and 300 characters');
+      setToast(t('pledges.toastValidation'));
       return;
     }
     if (submitTimer.current) clearTimeout(submitTimer.current);
@@ -72,23 +75,24 @@ export default function Pledges() {
     <CRTFrame>
       <Nav />
       <div className="flex flex-col gap-4">
+        <h1 className="crt-glow text-xl">{t('pledges.title')}</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Name (optional)"
+            placeholder={t('pledges.name') as string}
             className="border border-[var(--color-text)] bg-transparent p-2"
           />
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Your message"
+            placeholder={t('pledges.message') as string}
             maxLength={300}
             required
             className="border border-[var(--color-text)] bg-transparent p-2"
           />
           <button type="submit" className="self-start border border-[var(--color-text)] px-4 py-2">
-            Submit
+            {t('pledges.submit')}
           </button>
         </form>
 
@@ -102,11 +106,14 @@ export default function Pledges() {
             ))}
           </ul>
         ) : (
-          <p>No pledges yet. Be the first!</p>
+          <p>{t('pledges.noPledges')}</p>
         )}
       </div>
       {toast && <Toast message={toast} />}
-      <ThemeToggle className="absolute top-4 right-4" />
+      <div className="absolute top-4 right-4 flex gap-2">
+        <LanguageToggle />
+        <ThemeToggle />
+      </div>
     </CRTFrame>
   );
 }

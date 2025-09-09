@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "home": "Pradžia",
+    "constitution": "Konstitucija",
+    "pledges": "Pasižadėjimai"
+  },
+  "home": {
+    "title": "Užupis Katinas — Retro Duoklė",
+    "button": "Kasyk ausį",
+    "toast": "Baimė nukasyta. Kurk kažką gero.",
+    "tooltip": "Sdraskyk ausį!"
+  },
+  "constitution": {
+    "title": "Švelnūs Idealai",
+    "lines": [
+      "Kiekvienas gali svajoti švelniai.",
+      "Praeivis gali sustoti ir nusišypsoti.",
+      "Katinas gali padėti sunkiomis akimirkomis."
+    ],
+    "back": "Atgal į pradžią"
+  },
+  "pledges": {
+    "title": "Pasižadėjimai",
+    "name": "Vardas (nebūtina)",
+    "message": "Tavo žinutė",
+    "submit": "Pateikti",
+    "noPledges": "Dar nėra pasižadėjimų. Būk pirmas!",
+    "toastError": "Kažkas negerai",
+    "toastValidation": "Žinutė turi būti nuo 1 iki 300 simbolių"
+  }
+}

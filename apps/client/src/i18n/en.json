@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "home": "Home",
+    "constitution": "Constitution",
+    "pledges": "Pledges"
+  },
+  "home": {
+    "title": "Užupis Cat — Retro Tribute",
+    "button": "Scratch Ear",
+    "toast": "Fear scratched away. Go create something kind.",
+    "tooltip": "Scratch the ear!"
+  },
+  "constitution": {
+    "title": "Gentle Ideals",
+    "lines": [
+      "Everyone may dream kindly.",
+      "A passer-by may pause and smile.",
+      "A cat may help in difficult moments."
+    ],
+    "back": "Back Home"
+  },
+  "pledges": {
+    "title": "Pledges",
+    "name": "Name (optional)",
+    "message": "Your message",
+    "submit": "Submit",
+    "noPledges": "No pledges yet. Be the first!",
+    "toastError": "Something went wrong",
+    "toastValidation": "Message must be between 1 and 300 characters"
+  }
+}
