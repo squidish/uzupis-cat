@@ -92,19 +92,25 @@ export default function Home() {
   return (
     <CRTFrame>
       <Nav />
-      <h1 className="crt-glow text-2xl">{t('home.title')}</h1>
       <div className="absolute top-4 right-4 flex gap-2">
         <LanguageToggle />
         <ThemeToggle />
       </div>
-      {visitCount !== null && <p className="mt-4">Visitor #{visitCount}</p>}
-      <div className="relative">
-        <PixelCat scratchTrigger={scratchTrigger} />
-        {tooltip && <div className="tooltip">{tooltip}</div>}
-      </div>
-      <RetroButton onClick={() => scratch()} className="mt-4">
-        {t('home.button')}
-      </RetroButton>
+      {/* Main content area for the page */}
+      <main className="flex flex-col items-center">
+        {/* Heading is focus target when routes change */}
+        <h1 id="main-heading" tabIndex={-1} className="crt-glow text-2xl">
+          {t('home.title')}
+        </h1>
+        {visitCount !== null && <p className="mt-4">Visitor #{visitCount}</p>}
+        <div className="relative">
+          <PixelCat scratchTrigger={scratchTrigger} />
+          {tooltip && <div className="tooltip">{tooltip}</div>}
+        </div>
+        <RetroButton onClick={() => scratch()} className="mt-4">
+          {t('home.button')}
+        </RetroButton>
+      </main>
       {toast && <Toast message={toast} />}
     </CRTFrame>
   );

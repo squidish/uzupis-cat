@@ -20,7 +20,8 @@ export default function Toast({ message, duration = 3000 }: ToastProps) {
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-4 right-4 border border-[var(--color-text)] bg-[var(--color-bg)] px-4 py-2 crt-glow"
+      // High-contrast tokens ensure readable text against elevated background
+      className="fixed bottom-4 right-4 border border-[var(--color-text)] bg-elevated text-high px-4 py-2 crt-glow"
     >
       {message}
     </div>
