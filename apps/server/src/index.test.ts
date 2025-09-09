@@ -52,6 +52,21 @@ describe('POST /api/pledge', () => {
     expect(res.status).toBe(400);
     server.close();
   });
+
+  it('rejects overly long messages', async () => {
+    resetPledges();
+    const server = app.listen(0);
+    const { port } = server.address() as AddressInfo;
+
+    const longMessage = 'a'.repeat(301);
+    const res = await fetch(`http://localhost:${port}/api/pledge`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: longMessage }),
+    });
+    expect(res.status).toBe(400);
+    server.close();
+  });
 });
 
 describe('GET /api/pledge', () => {
