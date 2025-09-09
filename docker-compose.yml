@@ -1,21 +1,21 @@
-version: '3.9'
+version: "3.9"
 services:
-  server:
-    build: 
-       context: .
-       dockerfile: apps/server/Dockerfile      
-    ports:
-      - "3000:3000"
+  uzupis-cat-server:
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile
     environment:
-      - PORT=3000
-  client:
-    build: 
+      - NODE_ENV=production
+      - PORT=5174
+    ports:
+      - "5174:5174"
+
+  uzupis-cat-client:
+    build:
       context: .
       dockerfile: apps/client/Dockerfile
+    # If using nginx proxy config, this just serves the SPA
     ports:
-      - "5173:5173"
+      - "5173:80"
     depends_on:
-      - server
-    environment:
-      - PORT=5173
-      - API_PROXY_TARGET=http://server:5174
+      - uzupis-cat-server
