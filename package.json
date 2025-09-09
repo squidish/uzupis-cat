@@ -2,13 +2,16 @@
   "name": "uzupis-cat",
   "private": true,
   "version": "0.0.0",
+  "workspaces": ["apps/*"],
   "scripts": {
     "dev": "concurrently -k -n client,server -c auto \"npm run dev -w apps/client\" \"npm run dev -w apps/server\"",
     "build": "npm run build -w apps/client && npm run build -w apps/server",
     "lint": "npm run lint -w apps/client && npm run lint -w apps/server",
-    "test": "npm run test -w apps/client && npm run test -w apps/server && playwright test"
+    "test": "npm run test -w apps/client && npm run test -w apps/server",
+    "e2e": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.41.2",
     "@types/node": "^20.5.1",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
@@ -18,10 +21,6 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.0.3",
-    "typescript": "^5.2.2",
-    "@playwright/test": "^1.41.2"
-  },
-  "workspaces": [
-    "apps/*"
-  ]
+    "typescript": "^5.2.2"
+  }
 }
