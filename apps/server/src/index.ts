@@ -1,4 +1,6 @@
 import express from 'express';
+import cors from 'cors';
+
 
 export const app = express();
 const port = process.env.PORT ?? 3000;
@@ -11,11 +13,20 @@ interface Pledge {
 }
 const pledges: Pledge[] = [];
 
-app.use(express.json());
+/*app.use(express.json());
 app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
-});
+});*/
+
+app.use(cors()); // Enable CORS for all origins
+app.use(express.json()); // Enable JSON body parsing
+
+/*app.use(cors({
+  origin: 'http://localhost:5173', // Allow only your frontend's origin
+  methods: ['GET', 'POST'], // Restrict allowed HTTP methods
+  credentials: true, // Allow cookies or authentication headers
+}));*/
 
 app.get('/api/visits', (_req, res) => {
   visits += 1;

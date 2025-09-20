@@ -32,7 +32,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchVisits = async () => {
-      const res = await fetch('/api/visits');
+      const res = await fetch('http://localhost:5174/api/visits');
       const data = (await res.json()) as { total: number };
       setVisitCount(data.total);
     };
