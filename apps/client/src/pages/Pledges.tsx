@@ -16,7 +16,8 @@ interface Pledge {
 }
 
 async function fetchPledges(): Promise<Pledge[]> {
-  const res = await fetch(`http://localhost:5174/api/pledge`);
+  //const res = await fetch(`http://localhost:5174/api/pledge`);
+  const res = await fetch(`/api/pledge`); 
   if (!res.ok) throw new Error(`Failed to load pledges: ${res.status}`);
   return res.json();
 }
@@ -33,7 +34,8 @@ export default function Pledges() {
 
   const mutation = useMutation({
     mutationFn: async (payload: { name?: string; message: string }) => {
-      const res = await fetch(`http://localhost:5174/api/pledge`, {
+      //const res = await fetch(`http://localhost:5174/api/pledge`, {
+        const res = await fetch(`/api/pledge`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
